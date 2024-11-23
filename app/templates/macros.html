@@ -1,0 +1,13 @@
+{% macro render_input(name, type="text", value="", placeholder="" ) %}
+<div class="field" style="width: 100%; margin-bottom: 20px;">
+    <label class="label">{{ name }}</label>
+    <div class="control">
+        <input class="input" 
+               style="width: 100%; padding: 10px; font-size: 1.1em;"
+               type="{{ type }}" 
+               name="{{ name }}" 
+               value="{{ value }}" 
+               placeholder="{{ placeholder }}">
+    </div>
+</div>
+{% endmacro %}

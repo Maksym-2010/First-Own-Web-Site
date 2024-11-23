@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import render_input %}
+
+{% block title %}
+Main page
+{% endblock %}
+
+{% block content %}
+    <h1>All posts</h1>
+    <a class="btn btn-secondary rounded-pill px-3" href="{{ url_for('create_post') }}">Створити новий пост</a>
+    <div class="index">
+        {% for post_data in posts_with_comments %}
+            <div class="box">
+                <h2 class="title is-4">{{ post_data.post.title }}</h2>
+                <p>{{ post_data.post.content }}</p>
+
+                <a class="btn btn-primary rounded-pill px-3" href="{{ url_for('read_post', id=post_data.post.id) }}">Читати пост</a>
+                <a class="btn btn-warning rounded-pill px-3" href="{{ url_for('update_post', id=post_data.post.id) }}" class="button is-warning">Редагувати</a>
+                <a class="btn btn-danger rounded-pill px-3" href="{{ url_for('delete_post', id=post_data.post.id) }}" class="button is-warning">Видалити</a>
+                <a class="btn btn-secondary rounded-pill px-3" href="{{ url_for('create_com', id=post_data.post.id) }}" class="button is-warning">Коментувати</a>
+                
+                <h3>Коментарі</h3>
+<div class="comments-section">
+    <ul>
+        {% for comment in post_data.comments %}
+            <li><strong></strong>: {{ comment.comment }}</li>
+        {% endfor %}
+    </ul>
+</div>
+                </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $(".delete-post").click(function(){
+            var postID=$(this).data("id");
+            if (confirm("Ви впевнені, що хочете видалити цей пост?")) {
+                window.location.href = "/delete_post/" + postID;
+            }
+        })
+    })
+</script>
+{% endblock %}

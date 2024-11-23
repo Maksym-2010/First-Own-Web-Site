@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import render_input %}
+
+{% block title %}
+Create Post
+{% endblock %}
+
+{% block content %}
+<h1 class="title">Create Post</h1>
+<form method="post" action="{{ url_for('create_post') }}">
+    {{ render_input("Title", "content", "", "Введіть заголовок") }}
+    {{ render_input("Content", "content", "", "Введіть вміст") }}
+    <div class="control">
+        <button class="button is-primary" type="submit">Create</button>
+    </div>
+</form>
+
+{% endblock %}

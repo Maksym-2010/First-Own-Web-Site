@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% with msgs = get_flashed_messages(with_categories=True) %}
+        {% for category, message in msgs %}
+            {% if category == 'error' %}
+                <div class="flash-error">
+                    {{ message | safe }}
+                </div>
+            {% else %}
+                <div class="success">
+                    {{ message | safe }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+    <div class="title">
+        <h1>Привіт! На цьому сайті Ви можете читати блоги інших користувачів та коментувати їх.</h1>
+        <p>Для перегляду блогів зареєструйтесь та увійдіть до аккаунту.</p>
+        <a class="btn btn-info rounded-pill px-3" href="{{ url_for('registration') }}">>>Зареєструватися>></a>
+        <p>Якщо Ви вже зареєстровані, то увійдіть до свого аккаунту</p>
+        <a class="btn btn-info rounded-pill px-3" href="{{ url_for('log_in') }}">>>Увійти>></a>
+        
+       
+    </div>
+    <br>
+{% endblock %}
